@@ -9,6 +9,6 @@ function webGL(canvas){
 }
 
 webGL.prototype.setPixel     = setPixel;
-webGL.prototype.lineDDA      = lineDDA;
-webGL.prototype.lineBH       = lineBH;
+webGL.prototype.DDALine      = DDALine;
+webGL.prototype.BHLine       = BHLine;
 webGL.prototype.MidPointLine = MidPointLine;
