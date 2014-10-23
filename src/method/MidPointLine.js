@@ -26,7 +26,7 @@ function MidPointLine(start_x, start_y, end_x, end_y){
 		while( 0 <= (end_x - draw_x) * sx){
 			this.setPixel(draw_x, draw_y);
 
-			x += sx;
+			draw_x += sx;
 			p += twoDy;
 			if( p >= 0 ){
 				draw_y += sy;
@@ -42,7 +42,7 @@ function MidPointLine(start_x, start_y, end_x, end_y){
 		while( 0 <= (end_y - draw_y) * sy){
 			this.setPixel(draw_y, draw_x);
 
-			y += sy;
+			draw_y += sy;
 			p += twoDx;
 			if( p >= 0 ){
 				draw_x += sx;
