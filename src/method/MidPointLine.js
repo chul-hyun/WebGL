@@ -1,3 +1,5 @@
+/* exported MidPointLine */
+
 /**
  * MidPoint 직선 알고리즘
  * @method webGL.prototype.MidPointLine
@@ -6,8 +8,6 @@
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
-
-/* exported MidPointLine */
 function MidPointLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );

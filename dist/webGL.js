@@ -15,6 +15,8 @@
 }(this, function(require, exports, module) {
 
 
+/* exported BHLine */
+
 /**
  * Bresenham 직선 알고리즘
  * @method webGL.prototype.BHLine
@@ -23,8 +25,6 @@
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
-
-/* exported BHLine */
 function BHLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );
@@ -202,6 +202,8 @@ function BHLine(start_x, start_y, end_x, end_y){
 		}
 	}
 }
+/* exported DDALine */
+
 /**
  * DDA 직선 알고리즘
  * @method webGL.prototype.DDALine
@@ -210,8 +212,6 @@ function BHLine(start_x, start_y, end_x, end_y){
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
-
-/* exported DDALine */
 function DDALine(start_x, start_y, end_x, end_y){
 	var dx = end_x - start_x,
 		dy = end_y - start_y;
@@ -233,6 +233,8 @@ function DDALine(start_x, start_y, end_x, end_y){
 		this.setPixel(Math.round(draw_x), Math.round(draw_y));
 	}
 }
+/* exported MidPointLine */
+
 /**
  * MidPoint 직선 알고리즘
  * @method webGL.prototype.MidPointLine
@@ -241,8 +243,6 @@ function DDALine(start_x, start_y, end_x, end_y){
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
-
-/* exported MidPointLine */
 function MidPointLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );
@@ -288,6 +288,24 @@ function MidPointLine(start_x, start_y, end_x, end_y){
 		}
 	}
 }
+/* exported restore */
+
+/**
+ * restore
+ * @method webGL.prototype.restore
+ */
+function restore(){
+	this.ctx.restore();
+}
+/* exported save */
+
+/**
+ * save
+ * @method webGL.prototype.save
+ */
+function save(){
+	this.ctx.save();
+}
 /**
  * 점을 찍는 메소드.
  * @method webGL.prototype.setPixel
@@ -309,10 +327,12 @@ function webGL(canvas){
 	this.ctx = canvas.getContext('2d');
 }
 
-/* global setPixel, DDALine, BHLine, MidPointLine */
+/* global setPixel, DDALine, BHLine, MidPointLine, save, restore */
 webGL.prototype.setPixel     = setPixel;
 webGL.prototype.DDALine      = DDALine;
 webGL.prototype.BHLine       = BHLine;
 webGL.prototype.MidPointLine = MidPointLine;
+webGL.prototype.save         = save;
+webGL.prototype.restore      = restore;
 return webGL;
 }));
