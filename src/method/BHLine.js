@@ -6,6 +6,8 @@
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
+
+/* exported BHLine */
 function BHLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );

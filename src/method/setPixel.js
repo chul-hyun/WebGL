@@ -4,6 +4,8 @@
  * @param {int} x x좌표값
  * @param {int} y y좌표값
  */
+
+/* exported setPixel */
 function setPixel(x, y){
 	this.ctx.fillRect(x, y, 1, 1);
 }

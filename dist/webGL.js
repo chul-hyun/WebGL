@@ -23,6 +23,8 @@
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
+
+/* exported BHLine */
 function BHLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );
@@ -208,6 +210,8 @@ function BHLine(start_x, start_y, end_x, end_y){
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
+
+/* exported DDALine */
 function DDALine(start_x, start_y, end_x, end_y){
 	var dx = end_x - start_x,
 		dy = end_y - start_y;
@@ -237,12 +241,14 @@ function DDALine(start_x, start_y, end_x, end_y){
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
  */
+
+/* exported MidPointLine */
 function MidPointLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );
 
-	var twoDy = 2 * dy, twoDyMinusDx = 2 * (dy - dx);
-	var twoDx = 2 * dx, twoDxMinusDy = 2 * (dx - dy);
+	var twoDy = 2 * dy;
+	var twoDx = 2 * dx;
 
 	var sx = ( end_x >= start_x ) ? 1 : -1;
 	var sy = ( end_y >= start_y ) ? 1 : -1;
@@ -288,6 +294,8 @@ function MidPointLine(start_x, start_y, end_x, end_y){
  * @param {int} x x좌표값
  * @param {int} y y좌표값
  */
+
+/* exported setPixel */
 function setPixel(x, y){
 	this.ctx.fillRect(x, y, 1, 1);
 }
@@ -301,6 +309,7 @@ function webGL(canvas){
 	this.ctx = canvas.getContext('2d');
 }
 
+/* global setPixel, DDALine, BHLine, MidPointLine */
 webGL.prototype.setPixel     = setPixel;
 webGL.prototype.DDALine      = DDALine;
 webGL.prototype.BHLine       = BHLine;

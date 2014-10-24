@@ -8,6 +8,7 @@ function webGL(canvas){
 	this.ctx = canvas.getContext('2d');
 }
 
+/* global setPixel, DDALine, BHLine, MidPointLine */
 webGL.prototype.setPixel     = setPixel;
 webGL.prototype.DDALine      = DDALine;
 webGL.prototype.BHLine       = BHLine;
