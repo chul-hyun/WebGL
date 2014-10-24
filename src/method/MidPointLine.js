@@ -46,7 +46,7 @@ function MidPointLine(start_x, start_y, end_x, end_y){
 
 			draw_y += sy;
 			p += twoDx;
-			if( p <= 0 ){
+			if( p >= 0 ){
 				draw_x += sx;
 				p -= twoDy;
 			}
