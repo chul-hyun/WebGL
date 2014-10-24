@@ -304,7 +304,7 @@ function clear(){
  * @method webGL.prototype.restore
  */
 function restore(){
-	this.ctx.restore();
+	this.ctx.putImageData(this.bg, 0, 0);
 }
 /* exported save */
 
@@ -313,7 +313,7 @@ function restore(){
  * @method webGL.prototype.save
  */
 function save(){
-	this.ctx.save();
+	  this.bg = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
 }
 /**
  * 점을 찍는 메소드.

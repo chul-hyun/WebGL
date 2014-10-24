@@ -5,5 +5,5 @@
  * @method webGL.prototype.restore
  */
 function restore(){
-	this.ctx.restore();
+	this.ctx.putImageData(this.bg, 0, 0);
 }
