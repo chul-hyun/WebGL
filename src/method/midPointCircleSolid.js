@@ -36,6 +36,7 @@ function midPointCircleSolid(xc, yc, radius){
  * @param {int} yc 원의 중심 y값.
  * @param {int} x  1/8원을 그릴 점 x값.
  * @param {int} y  1/8원을 그릴 점 y값.
+ * @param {int} pmode 양수면 선까지 잇고 음수면 점만 찍는다.
  */
 function setPointSolid(xc, yc, x, y, pmode){
 	if( x === 0 ){

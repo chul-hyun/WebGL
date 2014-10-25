@@ -61,6 +61,8 @@
             
                 <li data-name="WebGL#midPointEllipse"><a href="WebGL.html#midPointEllipse">midPointEllipse</a></li>
             
+                <li data-name="WebGL#midPointEllipseSolid"><a href="WebGL.html#midPointEllipseSolid">midPointEllipseSolid</a></li>
+            
                 <li data-name="WebGL#midPointLine"><a href="WebGL.html#midPointLine">midPointLine</a></li>
             
                 <li data-name="WebGL#restore"><a href="WebGL.html#restore">restore</a></li>
@@ -70,6 +72,8 @@
                 <li data-name="WebGL#setPixel"><a href="WebGL.html#setPixel">setPixel</a></li>
             
                 <li data-name="WebGL~setEllipsePoint"><a href="WebGL.html#setEllipsePoint">setEllipsePoint</a></li>
+            
+                <li data-name="WebGL~setEllipsePointSolid"><a href="WebGL.html#setEllipsePointSolid">setEllipsePointSolid</a></li>
             
                 <li data-name="WebGL~setPoint"><a href="WebGL.html#setPoint">setPoint</a></li>
             
@@ -252,7 +256,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line46">line 46</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line47">line 47</a>
         </div>
         
     </div>
@@ -442,7 +446,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line270">line 270</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line271">line 271</a>
         </div>
         
     </div>
@@ -518,7 +522,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line236">line 236</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line237">line 237</a>
         </div>
         
     </div>
@@ -708,7 +712,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line281">line 281</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line282">line 282</a>
         </div>
         
     </div>
@@ -875,7 +879,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line340">line 340</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line341">line 341</a>
         </div>
         
     </div>
@@ -1042,7 +1046,197 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line404">line 404</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line406">line 406</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>MidPoint Ellipse Algorithm 을 구현한 메소드</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>xc</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>타원의 중심 x값.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>yc</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>타원의 중심 y값.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>rx</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>타원의 x축 반지름</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>ry</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>타원의 y축 반지름</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="midPointEllipseSolid">
+            
+            midPointEllipseSolid<span class="signature">(xc, yc, rx, ry)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGL.html">WebGL</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line480">line 480</a>
         </div>
         
     </div>
@@ -1232,7 +1426,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line478">line 478</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line560">line 560</a>
         </div>
         
     </div>
@@ -1422,7 +1616,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line535">line 535</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line617">line 617</a>
         </div>
         
     </div>
@@ -1498,7 +1692,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line546">line 546</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line628">line 628</a>
         </div>
         
     </div>
@@ -1574,7 +1768,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line555">line 555</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line637">line 637</a>
         </div>
         
     </div>
@@ -1718,7 +1912,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line462">line 462</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line464">line 464</a>
         </div>
         
     </div>
@@ -1896,6 +2090,214 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="setEllipsePointSolid">
+            
+            <span class="type-signature ">inner</span>setEllipsePointSolid<span class="signature">(xc, yc, x, y, pmode)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line539">line 539</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>1/8타원 나머지를 그려주는 midPointEllipseSolid helpler 함수.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>xc</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>타원의 중심 x값.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>yc</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>타원의 중심 y값.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>1/16타원을 그릴 점 x값.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>1/16타원을 그릴 점 y값.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>pmode</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>양수면 선까지 잇고 음수면 점만 찍는다.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="setPoint">
             
             <span class="type-signature ">inner</span>setPoint<span class="signature">(xc, yc, x, y)</span>
@@ -1903,7 +2305,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line316">line 316</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line317">line 317</a>
         </div>
         
     </div>
@@ -2083,12 +2485,12 @@
     <div class="nameContainer">
         <h4 class="name" id="setPointSolid">
             
-            <span class="type-signature ">inner</span>setPointSolid<span class="signature">(xc, yc, x, y)</span>
+            <span class="type-signature ">inner</span>setPointSolid<span class="signature">(xc, yc, x, y, pmode)</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line377">line 377</a>
+            <a href="WebGL.js.html">WebGL.js</a>, <a href="WebGL.js.html#line379">line 379</a>
         </div>
         
     </div>
@@ -2219,6 +2621,29 @@
         </tr>
 	
 	
+	
+        <tr>
+            
+                <td class="name"><code>pmode</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>양수면 선까지 잇고 음수면 점만 찍는다.</p></td>
+        </tr>
+	
+	
 	</tbody>
 </table>
     
@@ -2279,7 +2704,7 @@
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Oct 25 2014 21:31:13 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Oct 25 2014 21:49:20 GMT+0900 (KST)
         </footer>
     </div>
 </div>
