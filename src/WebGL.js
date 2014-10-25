@@ -20,4 +20,5 @@ WebGL.prototype.restore				= restore;
 WebGL.prototype.clear				= clear;
 WebGL.prototype.midPointCircle		= midPointCircle;
 WebGL.prototype.midPointCircleSolid	= midPointCircleSolid;
+WebGL.prototype.midPointEllipse		= midPointEllipse;
 /* jshint ignore:end */
