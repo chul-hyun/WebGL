@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: webGL.js</title>
+    <title>Source: WebGL.js</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -17,7 +17,7 @@
     
     
     <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"webGL"};
+    var config = {"monospaceLinks":true,"cleverLinks":true,"default":{"outputSourceFiles":true},"applicationName":"WebGL"};
     </script>
     
 
@@ -27,16 +27,16 @@
 <div id="wrap" class="clearfix">
     
 <div class="navigation">
-    <h3 class="applicationName"><a href="index.html">webGL</a></h3>
+    <h3 class="applicationName"><a href="index.html">WebGL</a></h3>
 
     <div class="search">
         <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
     </div>
     <ul class="list">
     
-        <li class="item" data-name="webGL">
+        <li class="item" data-name="WebGL">
             <span class="title">
-                <a href="webGL.html">webGL</a>
+                <a href="WebGL.html">WebGL</a>
                 
             </span>
             <ul class="members itemMembers">
@@ -49,19 +49,23 @@
             
             <span class="subtitle">Methods</span>
             
-                <li data-name="webGL#BHLine"><a href="webGL.html#BHLine">BHLine</a></li>
+                <li data-name="WebGL#BHLine"><a href="WebGL.html#BHLine">BHLine</a></li>
             
-                <li data-name="webGL#clear"><a href="webGL.html#clear">clear</a></li>
+                <li data-name="WebGL#clear"><a href="WebGL.html#clear">clear</a></li>
             
-                <li data-name="webGL#DDALine"><a href="webGL.html#DDALine">DDALine</a></li>
+                <li data-name="WebGL#DDALine"><a href="WebGL.html#DDALine">DDALine</a></li>
             
-                <li data-name="webGL#MidPointLine"><a href="webGL.html#MidPointLine">MidPointLine</a></li>
+                <li data-name="WebGL#midPointCircle"><a href="WebGL.html#midPointCircle">midPointCircle</a></li>
             
-                <li data-name="webGL#restore"><a href="webGL.html#restore">restore</a></li>
+                <li data-name="WebGL#midPointLine"><a href="WebGL.html#midPointLine">midPointLine</a></li>
             
-                <li data-name="webGL#save"><a href="webGL.html#save">save</a></li>
+                <li data-name="WebGL#restore"><a href="WebGL.html#restore">restore</a></li>
             
-                <li data-name="webGL#setPixel"><a href="webGL.html#setPixel">setPixel</a></li>
+                <li data-name="WebGL#save"><a href="WebGL.html#save">save</a></li>
+            
+                <li data-name="WebGL#setPixel"><a href="WebGL.html#setPixel">setPixel</a></li>
+            
+                <li data-name="WebGL~setPoint"><a href="WebGL.html#setPoint">setPoint</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -72,7 +76,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="webGL.js.html">Source: webGL.js</h1>
+        <h1 class="page-title" data-filename="WebGL.js.html">Source: WebGL.js</h1>
         
 
 
@@ -80,16 +84,54 @@
     <section>
         <article>
             <pre class="prettyprint source "><code>
+(function(root, factory) {
+    if(typeof exports === 'object') {
+        module.exports = factory(require, exports, module);
+    }
+    else if(typeof define === 'function' && define.amd) {
+        define(['require', 'exports', 'module'], factory);
+    }
+    else {
+        var req = function(id) {return root[id];},
+            exp = root,
+            mod = {exports: exp};
+        root['WebGL'] = factory(req, exp, mod);
+    }
+}(this, 
+/** @lends WebGL */ 
+function(require, exports, module) {
+
+/**
+ * 책 보고 구현해보는 openGL.
+ * @class WebGL
+ * @param  {Element} canvas canvas element
+ * @returns {WebGL}
+ */
+function WebGL(canvas){
+	this.ctx = canvas.getContext('2d');
+	this.canvas = canvas;
+}
+
+/* global setPixel, DDALine, BHLine, midPointLine, midPointCircle, save, restore, clear */
+WebGL.prototype.setPixel			= setPixel;
+WebGL.prototype.DDALine			= DDALine;
+WebGL.prototype.BHLine			= BHLine;
+WebGL.prototype.midPointLine		= midPointLine;
+WebGL.prototype.save				= save;
+WebGL.prototype.restore			= restore;
+WebGL.prototype.clear			= clear;
+WebGL.prototype.midPointCircle	= midPointCircle;
 
 /* exported BHLine */
 
 /**
  * Bresenham 직선 알고리즘
- * @method webGL.prototype.BHLine
+ * @method WebGL.prototype.BHLine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
 function BHLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
@@ -267,16 +309,19 @@ function BHLine(start_x, start_y, end_x, end_y){
 			draw_x++;
 		}
 	}
+
+	return this;
 }
 /* exported DDALine */
 
 /**
  * DDA 직선 알고리즘
- * @method webGL.prototype.DDALine
+ * @method WebGL.prototype.DDALine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
 function DDALine(start_x, start_y, end_x, end_y){
 	var dx = end_x - start_x,
@@ -298,18 +343,91 @@ function DDALine(start_x, start_y, end_x, end_y){
 		draw_y += yIncrement;
 		this.setPixel(Math.round(draw_x), Math.round(draw_y));
 	}
+
+	return this;
 }
-/* exported MidPointLine */
+/* exported clear */
+
+/**
+ * 화면을 모두 지운다.
+ * @method WebGL.prototype.clear
+ * @return {WebGL}
+ */
+function clear(){
+	 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	 return this;
+}
+/* exported midPointCircle */
+
+/**
+ * MidPoint Circle Algorithm 을 구현한 메소드
+ * @method WebGL.prototype.midPointCircle
+ * @param  {int} xc 원의 중심 x값.
+ * @param  {int} yc 원의 중심 y값.
+ * @param  {int} radius 원의 반지름
+ * @return {WebGL}
+ */
+function midPointCircle(xc, yc, radius){
+	var p, x, y;
+
+	p = 5 - 4 * radius;
+	x = 0;
+	y = radius;
+
+	while( x &lt;= y ){
+		setPoint.call(this, xc, yc, x, y);
+
+		x++;
+		if( p &lt; 0 ){
+			p += 8 * x + 4;
+		}else{
+			y--;
+			p += 8 * x + 4 - 8 * y;
+		}
+	}
+}
+
+/**
+ * 1/8원 나머지를 그려주는 midPointCircle helpler 함수.
+ * @param {int} xc 원의 중심 x값.
+ * @param {int} yc 원의 중심 y값.
+ * @param {int} x  1/8원을 그릴 점 x값.
+ * @param {int} y  1/8원을 그릴 점 y값.
+ */
+function setPoint(xc, yc, x, y){
+	this.setPixel(xc + x, yc + y);
+	this.setPixel(xc + x, yc - y);
+	if( x === 0 ){
+		this.setPixel(xc + y, yc + x);
+		this.setPixel(xc - y, yc + x);
+	}
+	else if( x === y ){
+		this.setPixel(xc - x, yc + y);
+		this.setPixel(xc - x, yc - y);
+	}
+	else{
+		this.setPixel(xc - x, yc + y);
+		this.setPixel(xc - x, yc - y);
+
+		this.setPixel(xc + y, yc + x);
+		this.setPixel(xc + y, yc - x);
+
+		this.setPixel(xc - y, yc + x);
+		this.setPixel(xc - y, yc - x);
+	}
+}
+/* exported midPointLine */
 
 /**
  * MidPoint 직선 알고리즘
- * @method webGL.prototype.MidPointLine
+ * @method WebGL.prototype.midPointLine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
-function MidPointLine(start_x, start_y, end_x, end_y){
+function midPointLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );
 
@@ -353,64 +471,45 @@ function MidPointLine(start_x, start_y, end_x, end_y){
 			}
 		}
 	}
-}
-/* exported clear */
-
-/**
- * clear
- * @method webGL.prototype.clear
- */
-function clear(){
-	 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	return this;
 }
 /* exported restore */
 
 /**
- * restore
- * @method webGL.prototype.restore
+ * 배경으로 복구한다.
+ * @method WebGL.prototype.restore
+ * @return {WebGL}
  */
 function restore(){
 	this.ctx.putImageData(this.bg, 0, 0);
+	return this;
 }
 /* exported save */
 
 /**
- * save
- * @method webGL.prototype.save
+ * 현제 화면을 배경으로 저장한다.
+ * @method WebGL.prototype.save
+ * @return {WebGL}
  */
 function save(){
 	  this.bg = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+	  return this;
 }
 /**
  * 점을 찍는 메소드.
- * @method webGL.prototype.setPixel
+ * @method WebGL.prototype.setPixel
  * @param {int} x x좌표값
  * @param {int} y y좌표값
+ * @return {WebGL}
  */
 
 /* exported setPixel */
 function setPixel(x, y){
 	this.ctx.fillRect(x, y, 1, 1);
+	return this;
 }
-/**
- * 책 보고 구현해보는 openGL.
- * @class webGL
- * @param  {Element} canvas canvas element
- * @returns {webGL}
- */
-function webGL(canvas){
-	this.ctx = canvas.getContext('2d');
-	this.canvas = canvas;
-}
-
-/* global setPixel, DDALine, BHLine, MidPointLine, save, restore, clear */
-webGL.prototype.setPixel     = setPixel;
-webGL.prototype.DDALine      = DDALine;
-webGL.prototype.BHLine       = BHLine;
-webGL.prototype.MidPointLine = MidPointLine;
-webGL.prototype.save         = save;
-webGL.prototype.restore      = restore;
-webGL.prototype.clear        = clear;</code></pre>
+return WebGL;
+}));</code></pre>
         </article>
     </section>
 
@@ -422,7 +521,7 @@ webGL.prototype.clear        = clear;</code></pre>
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Oct 25 2014 01:33:25 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Oct 25 2014 14:49:45 GMT+0900 (KST)
         </footer>
     </div>
 </div>

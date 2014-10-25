@@ -2,11 +2,12 @@
 
 /**
  * DDA 직선 알고리즘
- * @method webGL.prototype.DDALine
+ * @method WebGL.prototype.DDALine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
 function DDALine(start_x, start_y, end_x, end_y){
 	var dx = end_x - start_x,
@@ -28,4 +29,6 @@ function DDALine(start_x, start_y, end_x, end_y){
 		draw_y += yIncrement;
 		this.setPixel(Math.round(draw_x), Math.round(draw_y));
 	}
+
+	return this;
 }

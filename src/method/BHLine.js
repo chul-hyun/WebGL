@@ -2,11 +2,12 @@
 
 /**
  * Bresenham 직선 알고리즘
- * @method webGL.prototype.BHLine
+ * @method WebGL.prototype.BHLine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
 function BHLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
@@ -184,4 +185,6 @@ function BHLine(start_x, start_y, end_x, end_y){
 			draw_x++;
 		}
 	}
+
+	return this;
 }

@@ -9,7 +9,7 @@
 		"default": {
 			"outputSourceFiles" : true
 		},
-		"applicationName": "webGL"
+		"applicationName": "WebGL"
 	},
 	"markdown": {
 		"parser": "gfm",

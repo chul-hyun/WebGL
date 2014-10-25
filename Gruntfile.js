@@ -5,10 +5,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     umd: {
       'default': {
-        src: 'dist/webGL.js',
-        dest: 'dist/webGL.js',
+        src: 'dist/WebGL.js',
+        dest: 'dist/WebGL.js',
         template: 'unit.hbs',
-        objectToExport: 'webGL',
+        objectToExport: 'WebGL',
         deps: {
           args : [],
           'default': [],
@@ -43,13 +43,17 @@ module.exports = function(grunt) {
     },
     jsdoc : {
       dist : {
-        src: ['dist/webGL.js', 'README.md'], 
+        src: ['dist/WebGL.js', 'README.md'], 
         options: {
           destination: 'doc',
           configure: 'conf.json',
           template: 'node_modules/jaguarjs-jsdoc'
         }
       }
+    },
+    clean: {
+      doc   : ['./doc/**'],
+      dist  : ['./dist/**']
     },
     jshint: {
       files: ['Gruntfile.js', 'src/**'],
@@ -61,7 +65,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         files: {
-          'dist/webGL.js': ['src/**'],
+          'dist/WebGL.js': ['src/**'],
         }
       }
     }
@@ -70,7 +74,10 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Default task(s).
-  grunt.registerTask('init', ['jshint', 'concat', 'jsdoc', 'umd']);
+  grunt.registerTask('lint', ['jshint']);
+  grunt.registerTask('build', ['clean:dist', 'concat', 'umd']);
+  grunt.registerTask('build-doc', ['clean:doc', 'jsdoc']);
+  grunt.registerTask('init', ['lint', 'build', 'build-doc']);
   grunt.registerTask('default', ['init', 'watch']);
 
 };

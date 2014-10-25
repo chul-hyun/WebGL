@@ -10,20 +10,43 @@
         var req = function(id) {return root[id];},
             exp = root,
             mod = {exports: exp};
-        root['webGL'] = factory(req, exp, mod);
+        root['WebGL'] = factory(req, exp, mod);
     }
-}(this, function(require, exports, module) {
+}(this, 
+/** @lends WebGL */ 
+function(require, exports, module) {
 
+/**
+ * 책 보고 구현해보는 openGL.
+ * @class WebGL
+ * @param  {Element} canvas canvas element
+ * @returns {WebGL}
+ */
+function WebGL(canvas){
+	this.ctx = canvas.getContext('2d');
+	this.canvas = canvas;
+}
+
+/* global setPixel, DDALine, BHLine, midPointLine, midPointCircle, save, restore, clear */
+WebGL.prototype.setPixel			= setPixel;
+WebGL.prototype.DDALine			= DDALine;
+WebGL.prototype.BHLine			= BHLine;
+WebGL.prototype.midPointLine		= midPointLine;
+WebGL.prototype.save				= save;
+WebGL.prototype.restore			= restore;
+WebGL.prototype.clear			= clear;
+WebGL.prototype.midPointCircle	= midPointCircle;
 
 /* exported BHLine */
 
 /**
  * Bresenham 직선 알고리즘
- * @method webGL.prototype.BHLine
+ * @method WebGL.prototype.BHLine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
 function BHLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
@@ -201,16 +224,19 @@ function BHLine(start_x, start_y, end_x, end_y){
 			draw_x++;
 		}
 	}
+
+	return this;
 }
 /* exported DDALine */
 
 /**
  * DDA 직선 알고리즘
- * @method webGL.prototype.DDALine
+ * @method WebGL.prototype.DDALine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
 function DDALine(start_x, start_y, end_x, end_y){
 	var dx = end_x - start_x,
@@ -232,18 +258,91 @@ function DDALine(start_x, start_y, end_x, end_y){
 		draw_y += yIncrement;
 		this.setPixel(Math.round(draw_x), Math.round(draw_y));
 	}
+
+	return this;
 }
-/* exported MidPointLine */
+/* exported clear */
+
+/**
+ * 화면을 모두 지운다.
+ * @method WebGL.prototype.clear
+ * @return {WebGL}
+ */
+function clear(){
+	 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	 return this;
+}
+/* exported midPointCircle */
+
+/**
+ * MidPoint Circle Algorithm 을 구현한 메소드
+ * @method WebGL.prototype.midPointCircle
+ * @param  {int} xc 원의 중심 x값.
+ * @param  {int} yc 원의 중심 y값.
+ * @param  {int} radius 원의 반지름
+ * @return {WebGL}
+ */
+function midPointCircle(xc, yc, radius){
+	var p, x, y;
+
+	p = 5 - 4 * radius;
+	x = 0;
+	y = radius;
+
+	while( x <= y ){
+		setPoint.call(this, xc, yc, x, y);
+
+		x++;
+		if( p < 0 ){
+			p += 8 * x + 4;
+		}else{
+			y--;
+			p += 8 * x + 4 - 8 * y;
+		}
+	}
+}
+
+/**
+ * 1/8원 나머지를 그려주는 midPointCircle helpler 함수.
+ * @param {int} xc 원의 중심 x값.
+ * @param {int} yc 원의 중심 y값.
+ * @param {int} x  1/8원을 그릴 점 x값.
+ * @param {int} y  1/8원을 그릴 점 y값.
+ */
+function setPoint(xc, yc, x, y){
+	this.setPixel(xc + x, yc + y);
+	this.setPixel(xc + x, yc - y);
+	if( x === 0 ){
+		this.setPixel(xc + y, yc + x);
+		this.setPixel(xc - y, yc + x);
+	}
+	else if( x === y ){
+		this.setPixel(xc - x, yc + y);
+		this.setPixel(xc - x, yc - y);
+	}
+	else{
+		this.setPixel(xc - x, yc + y);
+		this.setPixel(xc - x, yc - y);
+
+		this.setPixel(xc + y, yc + x);
+		this.setPixel(xc + y, yc - x);
+
+		this.setPixel(xc - y, yc + x);
+		this.setPixel(xc - y, yc - x);
+	}
+}
+/* exported midPointLine */
 
 /**
  * MidPoint 직선 알고리즘
- * @method webGL.prototype.MidPointLine
+ * @method WebGL.prototype.midPointLine
  * @param  {int} start_x 시작 x값
  * @param  {int} start_y 시작 y값
  * @param  {int} end_x   끝 x값
  * @param  {int} end_y   끝 y값
+ * @return {WebGL}
  */
-function MidPointLine(start_x, start_y, end_x, end_y){
+function midPointLine(start_x, start_y, end_x, end_y){
 	var dx = Math.abs( end_x - start_x ),
 		dy = Math.abs( end_y - start_y );
 
@@ -287,63 +386,42 @@ function MidPointLine(start_x, start_y, end_x, end_y){
 			}
 		}
 	}
-}
-/* exported clear */
-
-/**
- * clear
- * @method webGL.prototype.clear
- */
-function clear(){
-	 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	return this;
 }
 /* exported restore */
 
 /**
- * restore
- * @method webGL.prototype.restore
+ * 배경으로 복구한다.
+ * @method WebGL.prototype.restore
+ * @return {WebGL}
  */
 function restore(){
 	this.ctx.putImageData(this.bg, 0, 0);
+	return this;
 }
 /* exported save */
 
 /**
- * save
- * @method webGL.prototype.save
+ * 현제 화면을 배경으로 저장한다.
+ * @method WebGL.prototype.save
+ * @return {WebGL}
  */
 function save(){
 	  this.bg = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+	  return this;
 }
 /**
  * 점을 찍는 메소드.
- * @method webGL.prototype.setPixel
+ * @method WebGL.prototype.setPixel
  * @param {int} x x좌표값
  * @param {int} y y좌표값
+ * @return {WebGL}
  */
 
 /* exported setPixel */
 function setPixel(x, y){
 	this.ctx.fillRect(x, y, 1, 1);
+	return this;
 }
-/**
- * 책 보고 구현해보는 openGL.
- * @class webGL
- * @param  {Element} canvas canvas element
- * @returns {webGL}
- */
-function webGL(canvas){
-	this.ctx = canvas.getContext('2d');
-	this.canvas = canvas;
-}
-
-/* global setPixel, DDALine, BHLine, MidPointLine, save, restore, clear */
-webGL.prototype.setPixel     = setPixel;
-webGL.prototype.DDALine      = DDALine;
-webGL.prototype.BHLine       = BHLine;
-webGL.prototype.MidPointLine = MidPointLine;
-webGL.prototype.save         = save;
-webGL.prototype.restore      = restore;
-webGL.prototype.clear        = clear;
-return webGL;
+return WebGL;
 }));
