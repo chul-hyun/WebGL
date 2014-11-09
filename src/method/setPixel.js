@@ -9,14 +9,15 @@
 
 /* exported setPixel */
 function setPixel(x, y, rgba){
-	if( _.isUndefined(rgba) ){
+	if( rgba === undefined ){
 		rgba = [255, 255, 255, 255];
 	}
+	
 	var pos = 4 * (this.width * x + y);
 
-	_.times(4, function(i){
+	for(var i = 0 ; i < 4 ; i ++){
 		this.cash.data[pos+i] = rgba[i];
-	}, this);
+	}
 
 	return this;
 }

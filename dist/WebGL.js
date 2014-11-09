@@ -684,14 +684,15 @@ var setPixel = (function(){
 	
 	/* exported setPixel */
 	function setPixel(x, y, rgba){
-		if( _.isUndefined(rgba) ){
+		if( rgba === undefined ){
 			rgba = [255, 255, 255, 255];
 		}
+		
 		var pos = 4 * (this.width * x + y);
 	
-		_.times(4, function(i){
+		for(var i = 0 ; i < 4 ; i ++){
 			this.cash.data[pos+i] = rgba[i];
-		}, this);
+		}
 	
 		return this;
 	}
@@ -712,29 +713,29 @@ var WebGL = (function(){
 	 * @returns {WebGL}
 	 */
 	function WebGL(canvas, x, y, width, height){
-		if( _.isUndefined(canvas) ){
+		if( canvas === undefined ){
 			throw new Error();
 		}
 		/**
 		 * start x
 		 * @type {Number}
 		 */
-		this.x = ( _.isUndefined(x) ) ? 0 : x;
+		this.x = ( x === undefined ) ? 0 : x;
 		/**
 		 * start y
 		 * @type {Number}
 		 */
-		this.y = ( _.isUndefined(y) ) ? 0 : y;
+		this.y = ( y === undefined ) ? 0 : y;
 		/**
 		 * width
 		 * @type {Number}
 		 */
-		this.width = ( _.isUndefined(width) ) ? canvas.width : width;
+		this.width = ( width === undefined ) ? canvas.width : width;
 		/**
 		 * height
 		 * @type {Number}
 		 */
-		this.height = ( _.isUndefined(height) ) ? canvas.height : height;
+		this.height = ( height === undefined ) ? canvas.height : height;
 		/**
 		 * canvas context
 		 * @member WebGL.prototype.ctx
@@ -769,7 +770,6 @@ var WebGL = (function(){
 	
 	/* exported WebGL */
 	/* jshint ignore:start */
-	var methods = []
 	WebGL.prototype.clear					= clear;
 	WebGL.prototype.getLayer				= getLayer;
 	WebGL.prototype.draw					= draw;

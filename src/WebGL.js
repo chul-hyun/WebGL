@@ -10,29 +10,29 @@
  * @returns {WebGL}
  */
 function WebGL(canvas, x, y, width, height){
-	if( _.isUndefined(canvas) ){
+	if( canvas === undefined ){
 		throw new Error();
 	}
 	/**
 	 * start x
 	 * @type {Number}
 	 */
-	this.x = ( _.isUndefined(x) ) ? 0 : x;
+	this.x = ( x === undefined ) ? 0 : x;
 	/**
 	 * start y
 	 * @type {Number}
 	 */
-	this.y = ( _.isUndefined(y) ) ? 0 : y;
+	this.y = ( y === undefined ) ? 0 : y;
 	/**
 	 * width
 	 * @type {Number}
 	 */
-	this.width = ( _.isUndefined(width) ) ? canvas.width : width;
+	this.width = ( width === undefined ) ? canvas.width : width;
 	/**
 	 * height
 	 * @type {Number}
 	 */
-	this.height = ( _.isUndefined(height) ) ? canvas.height : height;
+	this.height = ( height === undefined ) ? canvas.height : height;
 	/**
 	 * canvas context
 	 * @member WebGL.prototype.ctx
@@ -67,7 +67,6 @@ function WebGL(canvas, x, y, width, height){
 
 /* exported WebGL */
 /* jshint ignore:start */
-var methods = []
 WebGL.prototype.clear					= clear;
 WebGL.prototype.getLayer				= getLayer;
 WebGL.prototype.draw					= draw;
