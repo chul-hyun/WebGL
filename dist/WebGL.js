@@ -263,7 +263,7 @@ var clear = (function(){
 	 * @return {WebGL}
 	 */
 	function clear(){
-		 this.cash = ctx.createImageData(this.width, this.height);
+		 this.cash = this.ctx.createImageData(this.width, this.height);
 		 return this;
 	}
 return clear;
