@@ -309,6 +309,11 @@ var getLayer = (function(){
 	
 	/* exported getLayer */
 	function getLayer(x, y, width, height){
+		x = ( x === undefined ) ? 0 : x;
+		y = ( y === undefined ) ? 0 : y;
+		width = ( width === undefined ) ? this.width : width;
+		height = ( height === undefined ) ? this.height : height;
+		
 		var new_canvas = getCanvas( width, height );
 		var layer = new WebGL(new_canvas, x, y, width, height);
 		layer.index = this.layers.length;
