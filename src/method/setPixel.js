@@ -8,6 +8,6 @@
 
 /* exported setPixel */
 function setPixel(x, y){
-	this.ctx.fillRect(x, this.width - y, 1, 1);
+	this.ctx.fillRect(x, this.height - y, 1, 1);
 	return this;
 }
