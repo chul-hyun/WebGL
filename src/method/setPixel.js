@@ -16,7 +16,7 @@ function setPixel(x, y, rgba){
 
 	_.times(4, function(i){
 		this.cash.data[pos+i] = rgba[i];
-	});
+	}, this);
 
 	return this;
 }

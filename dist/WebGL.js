@@ -691,7 +691,7 @@ var setPixel = (function(){
 	
 		_.times(4, function(i){
 			this.cash.data[pos+i] = rgba[i];
-		});
+		}, this);
 	
 		return this;
 	}
@@ -769,6 +769,7 @@ var WebGL = (function(){
 	
 	/* exported WebGL */
 	/* jshint ignore:start */
+	var methods = []
 	WebGL.prototype.clear					= clear;
 	WebGL.prototype.getLayer				= getLayer;
 	WebGL.prototype.draw					= draw;

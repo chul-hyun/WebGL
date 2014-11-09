@@ -67,6 +67,7 @@ function WebGL(canvas, x, y, width, height){
 
 /* exported WebGL */
 /* jshint ignore:start */
+var methods = []
 WebGL.prototype.clear					= clear;
 WebGL.prototype.getLayer				= getLayer;
 WebGL.prototype.draw					= draw;
