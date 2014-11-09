@@ -19,6 +19,7 @@ function WebGL(canvas){
 	this.canvas = canvas;
 	/**
 	 * background data
+	 * @member WebGL.prototype.bg
 	 * @type {ImageData}
 	 */
 	this.bg = undefined;
