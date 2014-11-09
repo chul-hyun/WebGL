@@ -287,7 +287,7 @@ var draw = (function(){
 	
 		for( i = 0 ; i < len ; i++) {
 			layer = layers[i];
-			this.ctx.drawImage(layer.ctx , layer.x, layer.y);
+			this.ctx.drawImage(layer.canvas , layer.x, layer.y);
 		}
 	
 		return this;
