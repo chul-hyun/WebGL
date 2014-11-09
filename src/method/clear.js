@@ -7,6 +7,16 @@
  */
 function clear( x , y , w , h ){
 	 this.canvas.width = this.width;
-	 //layers 까지?
+	 
+	 var layers = this.layers;
+	var len = layers.length;
+	var i ;
+	var layer;
+
+	for( i = 0 ; i < len ; i++) {
+		layer = layers[i];
+		layer.canvas.width = layer.width;
+	}
+	
 	 return this;
 }
