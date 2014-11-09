@@ -10,8 +10,16 @@
 
 /* exported getLayer */
 function getLayer(x, y, width, height){
-	var layer = new WebGL(this.canvas, x, y, width, height);
+	var new_canvas = getCanvas( width, height );
+	var layer = new WebGL(new_canvas, x, y, width, height);
 	layer.index = this.layers.length;
 	this.layers.push(layer);
 	return layer;
+}
+
+function getCanvas(width, height){
+	var canvas = document.createElement('canvas');
+	canvas.setAttribute('width', height);
+	canvas.setAttribute('height', height);
+	return canvas;
 }

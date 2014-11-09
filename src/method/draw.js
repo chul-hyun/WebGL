@@ -6,7 +6,15 @@
  * @return {WebGL}
  */
 function draw(){
-	this.ctx.putImageData(this.cash, this.x, this.y);
-	this.cash = this.ctx.getImageData(0, 0, this.width, this.height);
+	var layers = this.layers;
+	var len = layers.length;
+	var i ;
+	var layer;
+
+	for( i = 0 ; i < len ; i++) {
+		layer = layers[i];
+		destCtx.drawImage(layer.ctx , layer.x, layer.y);
+	}
+
 	return this;
 }

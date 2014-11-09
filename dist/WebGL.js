@@ -258,12 +258,13 @@ var clear = (function(){
 	/* exported clear */
 	
 	/**
-	 * cash를  비운다.
+	 * canvas를 지운다.
 	 * @method WebGL.prototype.clear
 	 * @return {WebGL}
 	 */
-	function clear(){
-		 this.cash = this.ctx.createImageData(this.width, this.height);
+	function clear( x , y , w , h ){
+		 this.canvas.width = this.width;
+		 //layers 까지?
 		 return this;
 	}
 return clear;
@@ -279,8 +280,16 @@ var draw = (function(){
 	 * @return {WebGL}
 	 */
 	function draw(){
-		this.ctx.putImageData(this.cash, this.x, this.y);
-		this.cash = this.ctx.getImageData(0, 0, this.width, this.height);
+		var layers = this.layers;
+		var len = layers.length;
+		var i ;
+		var layer;
+	
+		for( i = 0 ; i < len ; i++) {
+			layer = layers[i];
+			destCtx.drawImage(layer.ctx , layer.x, layer.y);
+		}
+	
 		return this;
 	}
 return draw;
@@ -300,10 +309,18 @@ var getLayer = (function(){
 	
 	/* exported getLayer */
 	function getLayer(x, y, width, height){
-		var layer = new WebGL(this.canvas, x, y, width, height);
+		var new_canvas = getCanvas( width, height );
+		var layer = new WebGL(new_canvas, x, y, width, height);
 		layer.index = this.layers.length;
 		this.layers.push(layer);
 		return layer;
+	}
+	
+	function getCanvas(width, height){
+		var canvas = document.createElement('canvas');
+		canvas.setAttribute('width', height);
+		canvas.setAttribute('height', height);
+		return canvas;
 	}
 return getLayer;
 })();
@@ -679,22 +696,12 @@ var setPixel = (function(){
 	 * @method WebGL.prototype.setPixel
 	 * @param {int} x x좌표값
 	 * @param {int} y y좌표값
-	 * @param {Array} 색깔 정보값(0~255 범위) [rad, green, bule, alpha]
 	 * @return {WebGL}
 	 */
 	
 	/* exported setPixel */
-	function setPixel(x, y, rgba){
-		if( rgba === undefined ){
-			rgba = [255, 255, 255, 255];
-		}
-		
-		var pos = 4 * (this.width * x + y);
-	
-		for(var i = 0 ; i < 4 ; i ++){
-			this.cash.data[pos+i] = rgba[i];
-		}
-	
+	function setPixel(x, y){
+		this.ctx.fillRect(x, y, 1, 1);
 		return this;
 	}
 return setPixel;
@@ -749,12 +756,6 @@ var WebGL = (function(){
 		 * @type {Element}
 		 */
 		this.canvas = canvas;
-		/**
-		 * imgData cash
-		 * @member WebGL.prototype.cash
-		 * @type {ImageData}
-		 */
-		this.cash = this.ctx.getImageData(0, 0, this.width, this.height);
 		/**
 		 * sub WebGL.
 		 * @member WebGL.prototype.layers

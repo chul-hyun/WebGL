@@ -1,11 +1,12 @@
 /* exported clear */
 
 /**
- * cash를  비운다.
+ * canvas를 지운다.
  * @method WebGL.prototype.clear
  * @return {WebGL}
  */
-function clear(){
-	 this.cash = this.ctx.createImageData(this.width, this.height);
+function clear( x , y , w , h ){
+	 this.canvas.width = this.width;
+	 //layers 까지?
 	 return this;
 }

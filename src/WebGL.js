@@ -46,12 +46,6 @@ function WebGL(canvas, x, y, width, height){
 	 */
 	this.canvas = canvas;
 	/**
-	 * imgData cash
-	 * @member WebGL.prototype.cash
-	 * @type {ImageData}
-	 */
-	this.cash = this.ctx.getImageData(0, 0, this.width, this.height);
-	/**
 	 * sub WebGL.
 	 * @member WebGL.prototype.layers
 	 * @type {WebGLArray}
