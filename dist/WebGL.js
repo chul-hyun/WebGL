@@ -263,16 +263,23 @@ var clear = (function(){
 	 * @return {WebGL}
 	 */
 	function clear( x , y , w , h ){
-		 this.canvas.width = this.width;
+		this.ctx.save();
+		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+		this.ctx.clearRect(0, 0, this.width, this.height);
+		this.ctx.restore();
 		 
-		 var layers = this.layers;
+		var layers = this.layers;
 		var len = layers.length;
 		var i ;
 		var layer;
 	
 		for( i = 0 ; i < len ; i++) {
 			layer = layers[i];
-			layer.canvas.width = layer.width;
+			
+			layer.ctx.save();
+			layer.ctx.setTransform(1, 0, 0, 1, 0, 0);
+			layer.ctx.clearRect(0, 0, layer.width, layer.height);
+			layer.ctx.restore();
 		}
 		
 		 return this;
@@ -691,7 +698,7 @@ var setPixel = (function(){
 	
 	/* exported setPixel */
 	function setPixel(x, y){
-		this.ctx.fillRect(x, y, 1, 1);
+		this.ctx.fillRect(x, this.width - y, 1, 1);
 		return this;
 	}
 return setPixel;
@@ -707,8 +714,11 @@ var update = (function(){
 	 * @return {WebGL}
 	 */
 	function update(){
-		this.canvas.width = this.width;
-		
+		this.ctx.save();
+		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+		this.ctx.clearRect(0, 0, this.width, this.height);
+		this.ctx.restore();
+	
 		var layers = this.layers;
 		var len = layers.length;
 		var i ;
