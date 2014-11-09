@@ -13,7 +13,7 @@ function draw(){
 
 	for( i = 0 ; i < len ; i++) {
 		layer = layers[i];
-		destCtx.drawImage(layer.ctx , layer.x, layer.y);
+		this.ctx.drawImage(layer.ctx , layer.x, layer.y);
 	}
 
 	return this;
