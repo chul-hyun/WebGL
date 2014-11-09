@@ -50,7 +50,7 @@ function WebGL(canvas, x, y, width, height){
 	 * @member WebGL.prototype.cash
 	 * @type {ImageData}
 	 */
-	this.cash = ctx.createImageData(this.width, this.height);
+	this.cash = this.ctx.createImageData(this.width, this.height);
 	/**
 	 * sub WebGL.
 	 * @member WebGL.prototype.layers
