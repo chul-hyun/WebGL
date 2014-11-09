@@ -1,12 +1,11 @@
 /* exported clear */
 
 /**
- * 화면을 모두 지운다.
+ * cash를  비운다.
  * @method WebGL.prototype.clear
  * @return {WebGL}
  */
 function clear(){
-	 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-	 this.bg = undefined;
+	 this.cash = ctx.createImageData(this.width, this.height);
 	 return this;
 }
