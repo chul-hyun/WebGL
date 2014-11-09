@@ -16,7 +16,7 @@
 /** @lends WebGL */ 
 function(require, exports, module) {
 /*
- "WebGL - v0.0.0 -  2014-11-09" 
+ "WebGL - v0.0.0 -  2014-11-10" 
 */
 // Source: temp/method/BHLine.js
 var BHLine = (function(){
@@ -707,6 +707,8 @@ var update = (function(){
 	 * @return {WebGL}
 	 */
 	function update(){
+		this.canvas.width = this.width;
+		
 		var layers = this.layers;
 		var len = layers.length;
 		var i ;

@@ -6,6 +6,8 @@
  * @return {WebGL}
  */
 function update(){
+	this.canvas.width = this.width;
+	
 	var layers = this.layers;
 	var len = layers.length;
 	var i ;
