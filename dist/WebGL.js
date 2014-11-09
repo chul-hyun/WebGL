@@ -258,16 +258,53 @@ var clear = (function(){
 	/* exported clear */
 	
 	/**
-	 * 화면을 모두 지운다.
+	 * cash를  비운다.
 	 * @method WebGL.prototype.clear
 	 * @return {WebGL}
 	 */
 	function clear(){
-		 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		 this.bg = undefined;
+		 this.cash = ctx.createImageData(this.width, this.height);
 		 return this;
 	}
 return clear;
+})();
+// Source: temp/method/draw.js
+var draw = (function(){
+
+	/* exported draw */
+	
+	/**
+	 * cash에 저장된 data를 이용하여 canvas에 그린다.
+	 * @method WebGL.prototype.draw
+	 * @return {WebGL}
+	 */
+	function draw(){
+		this.ctx.putImageData(this.cash, this.x, this.y);
+		 return this;
+	}
+return draw;
+})();
+// Source: temp/method/getLayer.js
+var getLayer = (function(){
+
+	/**
+	 * layer 생성 및 반환.
+	 * @method WebGL.prototype.getLayer
+	 * @param {Number} [x=0]      start x
+	 * @param {Number} [y=0]      start y
+	 * @param {Number} [width=canvas.width]  width
+	 * @param {Number} [height=canvas.width]  height
+	 * @returns {WebGL}
+	 */
+	
+	/* exported getLayer */
+	function getLayer(x, y, width, height){
+		var layer = new WebGL(this.canvas, x, y, width, height);
+		layer.index = this.layers.length;
+		this.layers.push(layer);
+		return layer;
+	}
+return getLayer;
 })();
 // Source: temp/method/midPointCircle.js
 var midPointCircle = (function(){
@@ -633,40 +670,6 @@ var midPointLine = (function(){
 	}
 return midPointLine;
 })();
-// Source: temp/method/restore.js
-var restore = (function(){
-
-	/* exported restore */
-	
-	/**
-	 * 배경으로 복구한다.
-	 * @method WebGL.prototype.restore
-	 * @return {WebGL}
-	 */
-	function restore(){
-		if( this.bg !== undefined ){
-			this.ctx.putImageData(this.bg, 0, 0);
-		}
-		return this;
-	}
-return restore;
-})();
-// Source: temp/method/save.js
-var save = (function(){
-
-	/* exported save */
-	
-	/**
-	 * 현제 화면을 배경으로 저장한다.
-	 * @method WebGL.prototype.save
-	 * @return {WebGL}
-	 */
-	function save(){
-		  this.bg = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
-		  return this;
-	}
-return save;
-})();
 // Source: temp/method/setPixel.js
 var setPixel = (function(){
 
@@ -675,12 +678,21 @@ var setPixel = (function(){
 	 * @method WebGL.prototype.setPixel
 	 * @param {int} x x좌표값
 	 * @param {int} y y좌표값
+	 * @param {Array} 색깔 정보값(0~255 범위) [rad, green, bule, alpha]
 	 * @return {WebGL}
 	 */
 	
 	/* exported setPixel */
-	function setPixel(x, y){
-		this.ctx.fillRect(x, y, 1, 1);
+	function setPixel(x, y, rgba){
+		if( _.isUndefined(rgba) ){
+			rgba = [255, 255, 255, 255];
+		}
+		var pos = x + this.width * y;
+	
+		_.times(4, function(i){
+			this.cash.data[pos+i] = rgba[i];
+		});
+	
 		return this;
 	}
 return setPixel;
@@ -688,13 +700,41 @@ return setPixel;
 // Source: temp/WebGL.js
 var WebGL = (function(){
 
+	 
 	/**
 	 * 책 보고 구현해보는 openGL.
 	 * @class WebGL
-	 * @param  {Element} canvas canvas element
+	 * @param {Element} canvas canvas element
+	 * @param {Number} [x=0]      start x
+	 * @param {Number} [y=0]      start y
+	 * @param {Number} [width=canvas.width]  width
+	 * @param {Number} [height=canvas.width]  height
 	 * @returns {WebGL}
 	 */
-	function WebGL(canvas){
+	function WebGL(canvas, x, y, width, height){
+		if( _.isUndefined(canvas) ){
+			throw new Error();
+		}
+		/**
+		 * start x
+		 * @type {Number}
+		 */
+		this.x = ( _.isUndefined(x) ) ? 0 : x;
+		/**
+		 * start y
+		 * @type {Number}
+		 */
+		this.y = ( _.isUndefined(y) ) ? 0 : y;
+		/**
+		 * width
+		 * @type {Number}
+		 */
+		this.width = ( _.isUndefined(width) ) ? canvas.width : width;
+		/**
+		 * height
+		 * @type {Number}
+		 */
+		this.height = ( _.isUndefined(height) ) ? canvas.height : height;
 		/**
 		 * canvas context
 		 * @member WebGL.prototype.ctx
@@ -708,27 +748,40 @@ var WebGL = (function(){
 		 */
 		this.canvas = canvas;
 		/**
-		 * background data
-		 * @member WebGL.prototype.bg
+		 * imgData cash
+		 * @member WebGL.prototype.cash
 		 * @type {ImageData}
 		 */
-		this.bg = undefined;
-		this.save();
+		this.cash = ctx.createImageData(this.width, this.height);
+		/**
+		 * sub WebGL.
+		 * @member WebGL.prototype.layers
+		 * @type {WebGLArray}
+		 */
+		this.layers = [];
+		/**
+		 * parent WebGL's layers index
+		 * @member WebGL.prototype.index
+		 * @type {Number}
+		 */
+		this.index = -1;
 	}
 	
 	/* exported WebGL */
 	/* jshint ignore:start */
 	WebGL.prototype.setPixel					= setPixel;
-	WebGL.prototype.DDALine					= DDALine;
+	WebGL.prototype.DDALine				= DDALine;
 	WebGL.prototype.BHLine					= BHLine;
-	WebGL.prototype.midPointLine				= midPointLine;
-	WebGL.prototype.save						= save;
+	WebGL.prototype.midPointLine			= midPointLine;
+	WebGL.prototype.save					= save;
 	WebGL.prototype.restore					= restore;
 	WebGL.prototype.clear					= clear;
 	WebGL.prototype.midPointCircle			= midPointCircle;
 	WebGL.prototype.midPointCircleSolid		= midPointCircleSolid;
 	WebGL.prototype.midPointEllipse			= midPointEllipse;
-	WebGL.prototype.midPointEllipseSolid		= midPointEllipseSolid;
+	WebGL.prototype.midPointEllipseSolid	= midPointEllipseSolid;
+	WebGL.prototype.getLayer				= getLayer;
+	WebGL.prototype.draw					= draw;
 	/* jshint ignore:end */
 return WebGL;
 })();

@@ -27,12 +27,12 @@ function WebGL(canvas, x, y, width, height){
 	 * width
 	 * @type {Number}
 	 */
-	this.width = ( _.isUndefined(width) ) ? canvas.width;
+	this.width = ( _.isUndefined(width) ) ? canvas.width : width;
 	/**
 	 * height
 	 * @type {Number}
 	 */
-	this.height = ( _.isUndefined(height) ) ? canvas.height;
+	this.height = ( _.isUndefined(height) ) ? canvas.height : height;
 	/**
 	 * canvas context
 	 * @member WebGL.prototype.ctx
@@ -53,11 +53,13 @@ function WebGL(canvas, x, y, width, height){
 	this.cash = ctx.createImageData(this.width, this.height);
 	/**
 	 * sub WebGL.
-	 * @type {WebGL Array}
+	 * @member WebGL.prototype.layers
+	 * @type {WebGLArray}
 	 */
 	this.layers = [];
 	/**
 	 * parent WebGL's layers index
+	 * @member WebGL.prototype.index
 	 * @type {Number}
 	 */
 	this.index = -1;
