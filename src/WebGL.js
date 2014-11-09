@@ -63,7 +63,7 @@ function WebGL(canvas, x, y, width, height){
 /* jshint ignore:start */
 WebGL.prototype.clear					= clear;
 WebGL.prototype.getLayer				= getLayer;
-WebGL.prototype.draw					= draw;
+WebGL.prototype.update					= update;
 
 WebGL.prototype.setPixel					= setPixel;
 WebGL.prototype.DDALine				= DDALine;

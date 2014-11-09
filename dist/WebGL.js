@@ -279,31 +279,6 @@ var clear = (function(){
 	}
 return clear;
 })();
-// Source: temp/method/draw.js
-var draw = (function(){
-
-	/* exported draw */
-	
-	/**
-	 * cash에 저장된 data를 이용하여 canvas에 그린다.
-	 * @method WebGL.prototype.draw
-	 * @return {WebGL}
-	 */
-	function draw(){
-		var layers = this.layers;
-		var len = layers.length;
-		var i ;
-		var layer;
-	
-		for( i = 0 ; i < len ; i++) {
-			layer = layers[i];
-			this.ctx.drawImage(layer.canvas , layer.x, layer.y);
-		}
-	
-		return this;
-	}
-return draw;
-})();
 // Source: temp/method/getLayer.js
 var getLayer = (function(){
 
@@ -721,6 +696,31 @@ var setPixel = (function(){
 	}
 return setPixel;
 })();
+// Source: temp/method/update.js
+var update = (function(){
+
+	/* exported update */
+	
+	/**
+	 * cash에 저장된 data를 이용하여 canvas에 그린다.
+	 * @method WebGL.prototype.update
+	 * @return {WebGL}
+	 */
+	function update(){
+		var layers = this.layers;
+		var len = layers.length;
+		var i ;
+		var layer;
+	
+		for( i = 0 ; i < len ; i++) {
+			layer = layers[i];
+			this.ctx.drawImage(layer.canvas , layer.x, layer.y);
+		}
+	
+		return this;
+	}
+return update;
+})();
 // Source: temp/WebGL.js
 var WebGL = (function(){
 
@@ -789,7 +789,7 @@ var WebGL = (function(){
 	/* jshint ignore:start */
 	WebGL.prototype.clear					= clear;
 	WebGL.prototype.getLayer				= getLayer;
-	WebGL.prototype.draw					= draw;
+	WebGL.prototype.update					= update;
 	
 	WebGL.prototype.setPixel					= setPixel;
 	WebGL.prototype.DDALine				= DDALine;

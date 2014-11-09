@@ -1,11 +1,11 @@
-/* exported draw */
+/* exported update */
 
 /**
  * cash에 저장된 data를 이용하여 canvas에 그린다.
- * @method WebGL.prototype.draw
+ * @method WebGL.prototype.update
  * @return {WebGL}
  */
-function draw(){
+function update(){
 	var layers = this.layers;
 	var len = layers.length;
 	var i ;
