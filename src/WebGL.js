@@ -17,6 +17,12 @@ function WebGL(canvas){
 	 * @type {Element}
 	 */
 	this.canvas = canvas;
+	/**
+	 * background data
+	 * @type {ImageData}
+	 */
+	this.bg = undefined;
+	this.save();
 }
 
 /* exported WebGL */

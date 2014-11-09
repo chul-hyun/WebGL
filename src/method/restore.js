@@ -6,6 +6,8 @@
  * @return {WebGL}
  */
 function restore(){
-	this.ctx.putImageData(this.bg, 0, 0);
+	if( this.bg !== undefined ){
+		this.ctx.putImageData(this.bg, 0, 0);
+	}
 	return this;
 }

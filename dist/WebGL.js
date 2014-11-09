@@ -16,7 +16,7 @@
 /** @lends WebGL */ 
 function(require, exports, module) {
 /*
- "WebGL - v0.0.0 -  2014-11-03" 
+ "WebGL - v0.0.0 -  2014-11-09" 
 */
 // Source: temp/method/BHLine.js
 var BHLine = (function(){
@@ -643,7 +643,9 @@ var restore = (function(){
 	 * @return {WebGL}
 	 */
 	function restore(){
-		this.ctx.putImageData(this.bg, 0, 0);
+		if( this.bg !== undefined ){
+			this.ctx.putImageData(this.bg, 0, 0);
+		}
 		return this;
 	}
 return restore;
@@ -704,6 +706,12 @@ var WebGL = (function(){
 		 * @type {Element}
 		 */
 		this.canvas = canvas;
+		/**
+		 * background data
+		 * @type {ImageData}
+		 */
+		this.bg = undefined;
+		this.save();
 	}
 	
 	/* exported WebGL */
