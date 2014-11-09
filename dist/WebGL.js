@@ -687,7 +687,7 @@ var setPixel = (function(){
 		if( _.isUndefined(rgba) ){
 			rgba = [255, 255, 255, 255];
 		}
-		var pos = x + this.width * y;
+		var pos = 4 * (this.width * x + y);
 	
 		_.times(4, function(i){
 			this.cash.data[pos+i] = rgba[i];
