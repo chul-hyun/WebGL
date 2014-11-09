@@ -280,7 +280,8 @@ var draw = (function(){
 	 */
 	function draw(){
 		this.ctx.putImageData(this.cash, this.x, this.y);
-		 return this;
+		this.cash = this.ctx.getImageData(0, 0, this.width, this.height);
+		return this;
 	}
 return draw;
 })();
@@ -753,7 +754,7 @@ var WebGL = (function(){
 		 * @member WebGL.prototype.cash
 		 * @type {ImageData}
 		 */
-		this.cash = this.ctx.createImageData(this.width, this.height);
+		this.cash = this.ctx.getImageData(0, 0, this.width, this.height);
 		/**
 		 * sub WebGL.
 		 * @member WebGL.prototype.layers
