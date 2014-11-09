@@ -5,7 +5,17 @@
  * @returns {WebGL}
  */
 function WebGL(canvas){
+	/**
+	 * canvas context
+	 * @member WebGL.prototype.ctx
+	 * @type {Object}
+	 */
 	this.ctx = canvas.getContext('2d');
+	/**
+	 * canvas element
+	 * @member WebGL.prototype.canvas
+	 * @type {Element}
+	 */
 	this.canvas = canvas;
 }
 

@@ -52,6 +52,8 @@ function midPointEllipseSolid(xc, yc, rx, ry){
 
 /**
  * 1/8타원 나머지를 그려주는 midPointEllipseSolid helpler 함수.
+ * @method WebGL.prototype.setEllipsePointSolid
+ * @private
  * @param {int} xc 타원의 중심 x값.
  * @param {int} yc 타원의 중심 y값.
  * @param {int} x  1/16타원을 그릴 점 x값.

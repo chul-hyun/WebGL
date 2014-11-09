@@ -32,6 +32,8 @@ function midPointCircleSolid(xc, yc, radius){
 
 /**
  * 1/8원 나머지를 채워주는 midPointCircleSolid helpler 함수.
+ * @method WebGL.prototype.setPointSolid
+ * @private
  * @param {int} xc 원의 중심 x값.
  * @param {int} yc 원의 중심 y값.
  * @param {int} x  1/8원을 그릴 점 x값.
